@@ -4,8 +4,7 @@ import { IoMdStar } from "react-icons/io";
 import { TbBike } from "react-icons/tb";
 import { RxLapTimer } from "react-icons/rx";
 import { HiOutlineCurrencyRupee } from "react-icons/hi2";
-import { BiRupee } from "react-icons/bi";
-import { PRODUCT_IMG } from "../utils/constants";
+import MenuCategory from "./MenuCategory";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
@@ -24,25 +23,15 @@ const RestaurantMenu = () => {
     feeDetails,
     costForTwoMessage,
   } = resData?.data?.cards[2]?.card?.card?.info;
-  const { itemCards, title } =
+  const data =
     resData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
       ?.card;
 
-  if (!itemCards) {
-    {
-      console.log(itemCards);
-    }
-    {
-      console.log(resData);
-    }
-    return "Loading";
-  }
   return (
     <div className="max-w-[800px] m-auto">
       <div className="border-t border-1">
         <div className="flex justify-between mx-5 mt-10">
           <div>
-            {console.log(itemCards)}
             <h1 className="text-xl font-semibold text-[#282c3f]">{name}</h1>
             <h3 className="text-sm text-[#7e808c]">{cuisines.join(", ")}</h3>
             <h3 className="text-sm text-[#7e808c]">
@@ -70,42 +59,7 @@ const RestaurantMenu = () => {
           <span className="float-left">{costForTwoMessage}</span>
         </div>
       </div>
-      <div className="float-left w-full mt-5">
-        <h2>
-          {title}({itemCards.length})
-        </h2>
-        <ul>
-          {itemCards.map((dish) => {
-            return (
-              <li key={dish?.card?.info?.id}>
-                <div className="flex justify-between my-5 border-b p-5">
-                  <div className="text-xl font-medium text-[#3e4152]">
-                    {dish?.card?.info?.name}
-                    <div className="text-base font-normal text-[#3e4152]">
-                      <span>
-                        <BiRupee className="float-left mt-1" />
-                        {dish?.card?.info?.price / 100}
-                      </span>
-                    </div>
-                    <p className="text-base text-[rgba(40,44,63,.45)] font-light leading-snug mt-4">
-                      {dish?.card?.info?.description}
-                    </p>
-                  </div>
-                  <div>
-                    <img
-                      src={PRODUCT_IMG + dish?.card?.info?.imageId}
-                      className="h-24"
-                    />
-                    <button className="bg-white text-[#60b246] cursor-pointer border border-[d4d5d9] text-sm font-semibold leading-8 rounded-md shadow-md w-24">
-                      ADD
-                    </button>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <MenuCategory data={data} />
     </div>
   );
 };
