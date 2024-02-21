@@ -3,11 +3,13 @@ import ResCard from "./ResCard";
 import { FETCH_API } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineCheck from "../utils/useOnlineCheck";
 
 const Body = () => {
   const [resList, setResList] = useState([]);
   const [searchText, setSearchText] = useState();
   const [filterDdata, setFilterData] = useState();
+  const onlineStatus = useOnlineCheck();
 
   useEffect(() => {
     fetchResList();
@@ -24,15 +26,18 @@ const Body = () => {
         ?.restaurants
     );
   };
+  if (onlineStatus !== "online") {
+    return onlineStatus;
+  }
   if (resList.length === 0) {
     return <Shimmer />;
   }
   return (
-    <div className="body">
-      <div className="searchContainer">
+    <div className="body mx-[15%]">
+      <div className="my-4 mx-auto items-center flex justify-center">
         <input
           type="text"
-          className="searchInput"
+          className="border border-solid"
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
@@ -56,9 +61,9 @@ const Body = () => {
           type="button"
           className="filter"
           onClick={() => {
-            setResList(
-              resList.filter((res) => {
-                return res.info.avgRating > 4;
+            setFilterData(
+              filterDdata.filter((res) => {
+                return res?.info?.avgRating >= 4;
               })
             );
           }}
@@ -66,7 +71,7 @@ const Body = () => {
           Top Rated Restaurants
         </button>
       </div>
-      <div className="resContainer">
+      <div className="grid grid-cols-4 justify-center gap-9 m-auto">
         {filterDdata.map((res, i) => {
           return (
             <Link to={"/restaurant/" + res.info.id} key={res.info.id}>

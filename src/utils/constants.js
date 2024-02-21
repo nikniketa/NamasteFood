@@ -1,5 +1,5 @@
 export const LOGO_IMG =
-  "https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png";
+  "https://cdn.pixabay.com/photo/2017/02/21/08/49/food-2085075_640.png";
 
 export const CARD_IMG =
   "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
@@ -9,3 +9,6 @@ export const FETCH_API =
 
 export const MENU_API =
   "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.69340639999999&lng=77.12946079999999&restaurantId=";
+
+export const PRODUCT_IMG =
+  "https://media-assets.swiggy.com/swiggy/image/upload/";

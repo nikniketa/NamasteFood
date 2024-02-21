@@ -1,5 +1,16 @@
-const About = () => {
-  return <div>About Page</div>;
-};
+import React from "react";
+import UserClass from "./UserClass";
+
+class About extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>About</h1>
+        <h2>This is Food ordering app using Swiggy's API</h2>
+        <UserClass />
+      </div>
+    );
+  }
+}
 
 export default About;
