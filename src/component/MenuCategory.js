@@ -1,17 +1,18 @@
 import CategoryMenuItem from "./CategoryMenuItem";
 
-const MenuCategory = ({ data }) => {
-  const { title, itemCards } = data;
-
-  if (!title || !itemCards) {
-    return "Loading...";
-  }
+const MenuCategory = ({ category, show, setShowIndex }) => {
+  const { title, itemCards } = category.card.card;
+  const handleAccordion = () => {
+    setShowIndex();
+  };
   return (
-    <div className="float-left w-full mt-5">
-      <h2>
-        {title}({itemCards.length})
-      </h2>
-      <CategoryMenuItem itemCards={itemCards} />
+    <div className="float-left w-full mt-5 border-t-8 p-3">
+      <button onClick={() => handleAccordion()}>
+        <h2 className="font-bold cursor-pointer">
+          {category.card.card.title}({itemCards.length})
+        </h2>
+      </button>
+      {show && <CategoryMenuItem itemCards={itemCards} />}
     </div>
   );
 };

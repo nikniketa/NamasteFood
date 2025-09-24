@@ -1,7 +1,15 @@
 import { BiRupee } from "react-icons/bi";
 import { PRODUCT_IMG } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addItem, deleteItem } from "../utils/cartSlice";
 
 const CategoryMenuItem = ({ itemCards }) => {
+  const dispatch = useDispatch();
+  handleAddItem = (item) => {
+    dispatch(addItem(item));
+  };
+  console.log(itemCards);
+  handleRemoveItem = (dish) => dispatch(deleteItem(dish));
   return (
     <ul>
       {itemCards.map((dish) => {
@@ -25,9 +33,13 @@ const CategoryMenuItem = ({ itemCards }) => {
                   src={PRODUCT_IMG + dish?.card?.info?.imageId}
                   className="h-24"
                 />
-                <button className="bg-white text-[#60b246] cursor-pointer border border-[d4d5d9] text-sm font-semibold leading-8 rounded-md shadow-md w-24">
-                  ADD
-                </button>
+                <div className="bg-white text-[#60b246] cursor-pointer border border-[d4d5d9] text-sm font-semibold leading-8 rounded-md shadow-md w-24 text-center">
+                  <button onClick={() => handleAddItem(dish)}>+</button>
+                  <span>ADD</span>
+                  <button onClick={() => handleRemoveItem(dish.card.info.id)}>
+                    -
+                  </button>
+                </div>
               </div>
             </div>
           </li>

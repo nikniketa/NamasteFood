@@ -1,5 +1,6 @@
 import React from "react";
 import UserClass from "./UserClass";
+import UserContext from "../utils/UserContext";
 
 class About extends React.Component {
   render() {

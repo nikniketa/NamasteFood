@@ -1,8 +1,11 @@
 import { CARD_IMG } from "../utils/constants";
 import { MdStars } from "react-icons/md";
+import UserContext from "../utils/UserContext";
+import { useContext } from "react";
 
 const ResCard = (props) => {
   const { resData } = props;
+  const { loggedInUser } = useContext(UserContext);
   const {
     name,
     cuisines,
@@ -12,7 +15,6 @@ const ResCard = (props) => {
     cloudinaryImageId,
     aggregatedDiscountInfoV3,
   } = resData.info;
-  console.log(resData.info);
   return (
     <div className="grid grid-flow-row gap-3">
       <div
@@ -38,6 +40,7 @@ const ResCard = (props) => {
           {cuisines.join(", ")}
         </h4>
         <h4 className="text-gray-500">{areaName}</h4>
+        <div>{loggedInUser}</div>
       </div>
     </div>
   );

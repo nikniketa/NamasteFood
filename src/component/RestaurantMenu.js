@@ -5,11 +5,13 @@ import { TbBike } from "react-icons/tb";
 import { RxLapTimer } from "react-icons/rx";
 import { HiOutlineCurrencyRupee } from "react-icons/hi2";
 import MenuCategory from "./MenuCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const resData = useResData(resId);
-
+  const [showIndex, setShowIndex] = useState(0);
+  console.log(resData);
   if (resData === null) {
     return "Loading";
   }
@@ -23,10 +25,15 @@ const RestaurantMenu = () => {
     feeDetails,
     costForTwoMessage,
   } = resData?.data?.cards[2]?.card?.card?.info;
-  const data =
-    resData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-      ?.card;
-
+  const categories =
+    resData?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter(
+      (card) => {
+        return (
+          card.card.card["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+        );
+      }
+    );
   return (
     <div className="max-w-[800px] m-auto">
       <div className="border-t border-1">
@@ -59,7 +66,14 @@ const RestaurantMenu = () => {
           <span className="float-left">{costForTwoMessage}</span>
         </div>
       </div>
-      <MenuCategory data={data} />
+      {categories.map((category, index) => (
+        <MenuCategory
+          key={category.card.card.title}
+          category={category}
+          show={index == showIndex ? true : false}
+          setShowIndex={() => setShowIndex(index)}
+        />
+      ))}
     </div>
   );
 };
