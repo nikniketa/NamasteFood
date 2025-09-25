@@ -11,7 +11,7 @@ const Header = () => {
   const onlineStatus = useOnlineCheck();
   const cartItems = useSelector((store) => store.cart.items);
   return (
-    <div className="px-24 py-7 shadow-lg ">
+    <div className="px-24 py-4 shadow-lg ">
       <div className="flex justify-between items-center w-4/5 m-auto">
         <div className="w-12 h-12 rounded-xl overflow-hidden">
           <Link to="/">

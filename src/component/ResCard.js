@@ -40,7 +40,7 @@ const ResCard = (props) => {
           {cuisines.join(", ")}
         </h4>
         <h4 className="text-gray-500">{areaName}</h4>
-        <div>{loggedInUser}</div>
+        {/* <div>{loggedInUser}</div> */}
       </div>
     </div>
   );

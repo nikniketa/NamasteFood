@@ -3,8 +3,8 @@ import React from "react";
 const WhatInMind = ({ data }) => {
   return (
     <>
-      <h1 className="font-bold text-xl">What's on your mind?</h1>
-      <div className="flex flex-wrap overflow-x-scroll my-16 border-b-2">
+      <h1 className="font-bold text-xl mt-5">What's on your mind?</h1>
+      <div className="flex flex-wrap overflow-x-scroll py-8 my-8 border-b-2">
         <ul className="flex-row flex ">
           {data.map((image) => {
             return (

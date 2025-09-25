@@ -6,9 +6,12 @@ import { Link } from "react-router-dom";
 import useOnlineCheck from "../utils/useOnlineCheck";
 import UserContext from "../utils/UserContext";
 import WhatInMind from "./WhatInMind";
+import TopBrands from "./TopBrands";
+import RestroList from "./RestroList";
 
 const Body = () => {
   const [resList, setResList] = useState([]);
+  const [topBrands, setTopBrands] = useState([]);
   const [searchText, setSearchText] = useState();
   const [filterDdata, setFilterData] = useState();
   const onlineStatus = useOnlineCheck();
@@ -31,18 +34,22 @@ const Body = () => {
       jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
-    console.log(jsonData.data);
+    setTopBrands(
+      jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
   };
   if (onlineStatus !== "online") {
     return onlineStatus;
   }
-  console.log(whatInMind);
 
   if (resList.length === 0) {
     return <Shimmer />;
   }
   return (
     <div className="body mx-[15%]">
+      <WhatInMind data={whatInMind} />
+      <TopBrands data={topBrands} />
       <div className="my-4 mx-auto items-center flex justify-center">
         <input
           type="text"
@@ -82,21 +89,10 @@ const Body = () => {
             );
           }}
         >
-          Top Rated Restaurants
+          Rating 4.0+
         </button>
       </div>
-      <div>
-        <WhatInMind data={whatInMind} />
-      </div>
-      <div className="grid grid-cols-4 justify-center gap-9 m-auto">
-        {filterDdata.map((res, i) => {
-          return (
-            <Link to={"/restaurant/" + res.info.id} key={res.info.id}>
-              <ResCard resData={res} />
-            </Link>
-          );
-        })}
-      </div>
+      <RestroList data={filterDdata} />
     </div>
   );
 };
